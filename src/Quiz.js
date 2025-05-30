@@ -209,10 +209,17 @@ export default function CyberStrengthQuiz() {
 							key={idx}
 							onClick={() => handleOptionSelect(idx)}
 							className={
-								answers[currentQuestion] === idx ? "bg-blue-800 text-white" : ""
+								answers[currentQuestion] === idx
+									? "bg-blue-800 text-white flex justify-between items-center"
+									: "flex justify-between items-center"
 							}
 						>
-							{option}
+							<span>{option}</span>
+							{answers[currentQuestion] === idx && (
+								<span aria-label="selected" className="ml-2">
+									✓
+								</span>
+							)}
 						</Button>
 					))}
 				</div>
