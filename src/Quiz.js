@@ -187,66 +187,100 @@ export default function CyberStrengthQuiz() {
 	if (submitted) {
 		const result = getResult();
 		return (
-			<Card className="max-w-xl mx-auto mt-10 p-6">
-				<CardContent>
-					<h2 className="text-2xl font-bold mb-4">Your Cyber Strength</h2>
-					<p className="text-xl font-semibold mb-2">{result.type}</p>
-					<p>{result.description}</p>
-				</CardContent>
-			</Card>
+			<div className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-200 flex items-center justify-center p-4">
+				<Card className="max-w-xl w-full shadow-2xl border border-blue-200 rounded-2xl bg-white p-8">
+					<CardContent>
+						<h2 className="text-3xl font-extrabold mb-4 text-blue-800 text-center">
+							Your Cyber Strength
+						</h2>
+						<p className="text-2xl font-semibold mb-2 text-purple-700 text-center">
+							{result.type}
+						</p>
+						<p className="text-lg text-gray-700 text-center">
+							{result.description}
+						</p>
+						<div className="mt-8 flex justify-center">
+							<Button
+								onClick={() => window.location.reload()}
+								className="bg-purple-600 hover:bg-purple-700 transition"
+							>
+								Restart Quiz
+							</Button>
+						</div>
+					</CardContent>
+				</Card>
+			</div>
 		);
 	}
 
 	return (
-		<Card className="max-w-xl mx-auto mt-10 p-6">
-			<CardContent>
-				<h2 className="text-2xl font-bold mb-4">
-					{questions[currentQuestion].question}
-				</h2>
-				<div className="flex flex-col gap-2 mb-4">
-					{questions[currentQuestion].options.map((option, idx) => (
+		<div className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-200 flex items-center justify-center p-4">
+			<Card className="max-w-xl w-full shadow-2xl border border-blue-200 rounded-2xl bg-white p-8">
+				<CardContent>
+					<h2 className="text-2xl sm:text-3xl font-extrabold mb-6 text-blue-800 text-center">
+						{questions[currentQuestion].question}
+					</h2>
+					<div className="flex flex-col gap-4 mb-8">
+						{questions[currentQuestion].options.map((option, idx) => (
+							<Button
+								key={idx}
+								onClick={() => handleOptionSelect(idx)}
+								className={
+									"flex justify-between items-center w-full py-3 px-5 rounded-lg border transition " +
+									(answers[currentQuestion] === idx
+										? "bg-blue-700 text-white border-blue-700 shadow-lg scale-105"
+										: "bg-white text-blue-900 border-blue-200 hover:bg-blue-100 hover:border-blue-400")
+								}
+								style={{
+									fontWeight:
+										answers[currentQuestion] === idx
+											? "bold"
+											: "normal",
+								}}
+							>
+								<span>{option}</span>
+								{answers[currentQuestion] === idx && (
+									<span
+										aria-label="selected"
+										className="ml-2 text-xl"
+									>
+										✓
+									</span>
+								)}
+							</Button>
+						))}
+					</div>
+					<div className="flex justify-between mb-4">
 						<Button
-							key={idx}
-							onClick={() => handleOptionSelect(idx)}
-							className={
-								answers[currentQuestion] === idx
-									? "bg-blue-800 text-white flex justify-between items-center"
-									: "flex justify-between items-center"
-							}
+							onClick={handlePrev}
+							disabled={currentQuestion === 0}
+							className="bg-gray-200 text-gray-700 hover:bg-gray-300 disabled:opacity-50"
 						>
-							<span>{option}</span>
-							{answers[currentQuestion] === idx && (
-								<span aria-label="selected" className="ml-2">
-									✓
-								</span>
-							)}
+							Previous
 						</Button>
-					))}
-				</div>
-				<div className="flex justify-between">
-					<Button onClick={handlePrev} disabled={currentQuestion === 0}>
-						Previous
-					</Button>
-					{currentQuestion < questions.length - 1 ? (
-						<Button
-							onClick={handleNext}
-							disabled={answers[currentQuestion] === null}
-						>
-							Next
-						</Button>
-					) : (
-						<Button
-							onClick={handleSubmit}
-							disabled={answers[currentQuestion] === null}
-						>
-							Submit
-						</Button>
-					)}
-				</div>
-				<div className="mt-4 text-sm text-gray-500">
-					Question {currentQuestion + 1} of {questions.length}
-				</div>
-			</CardContent>
-		</Card>
+						{currentQuestion < questions.length - 1 ? (
+							<Button
+								onClick={handleNext}
+								disabled={answers[currentQuestion] === null}
+								className="bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50"
+							>
+								Next
+							</Button>
+						) : (
+							<Button
+								onClick={handleSubmit}
+								disabled={answers[currentQuestion] === null}
+								className="bg-green-600 text-white hover:bg-green-700 disabled:opacity-50"
+							>
+								Submit
+							</Button>
+						)}
+					</div>
+					<div className="mt-2 text-sm text-gray-500 text-center">
+						Question {currentQuestion + 1} of {questions.length}
+					</div>
+				</CardContent>
+			</Card>
+		</div>
 	);
 }
