@@ -276,8 +276,8 @@ export default function CyberStrengthQuiz() {
 							</Button>
 						)}
 					</div>
-					<div className="mt-2 text-sm text-pink-100 text-center drop-shadow">
-						Question {currentQuestion + 1} of {questions.length}
+					<div className="mt-2 text-sm text-black text-center drop-shadow">
+						Question {currentQuestion + 1} out {questions.length}
 					</div>
 				</CardContent>
 			</Card>
