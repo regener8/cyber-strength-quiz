@@ -214,10 +214,10 @@ export default function CyberStrengthQuiz() {
 	}
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-200 flex items-center justify-center p-4">
-			<Card className="max-w-xl w-full shadow-2xl border border-blue-200 rounded-2xl bg-white p-8">
+		<div className="min-h-screen min-w-full flex items-center justify-center p-0 m-0 bg-gradient-to-br from-pink-300 via-pink-400 to-purple-600">
+			<Card className="max-w-xl w-full shadow-2xl border border-pink-200 rounded-2xl bg-white/90 p-8">
 				<CardContent>
-					<h2 className="text-2xl sm:text-3xl font-extrabold mb-6 text-blue-800 text-center">
+					<h2 className="text-2xl sm:text-3xl font-extrabold mb-6 text-purple-800 text-center">
 						{questions[currentQuestion].question}
 					</h2>
 					<div className="flex flex-col gap-4 mb-8">
@@ -228,8 +228,8 @@ export default function CyberStrengthQuiz() {
 								className={
 									"flex justify-between items-center w-full py-3 px-5 rounded-lg border transition " +
 									(answers[currentQuestion] === idx
-										? "bg-blue-700 text-white border-blue-700 shadow-lg scale-105"
-										: "bg-white text-blue-900 border-blue-200 hover:bg-blue-100 hover:border-blue-400")
+										? "bg-purple-700 text-white border-purple-700 shadow-lg scale-105"
+										: "bg-white text-pink-900 border-pink-200 hover:bg-pink-100 hover:border-pink-400")
 								}
 								style={{
 									fontWeight:
@@ -254,7 +254,7 @@ export default function CyberStrengthQuiz() {
 						<Button
 							onClick={handlePrev}
 							disabled={currentQuestion === 0}
-							className="bg-gray-200 text-gray-700 hover:bg-gray-300 disabled:opacity-50"
+							className="bg-pink-200 text-pink-700 hover:bg-pink-300 disabled:opacity-50"
 						>
 							Previous
 						</Button>
@@ -270,13 +270,13 @@ export default function CyberStrengthQuiz() {
 							<Button
 								onClick={handleSubmit}
 								disabled={answers[currentQuestion] === null}
-								className="bg-green-600 text-white hover:bg-green-700 disabled:opacity-50"
+								className="bg-pink-600 text-white hover:bg-pink-700 disabled:opacity-50"
 							>
 								Submit
 							</Button>
 						)}
 					</div>
-					<div className="mt-2 text-sm text-gray-500 text-center">
+					<div className="mt-2 text-sm text-pink-100 text-center drop-shadow">
 						Question {currentQuestion + 1} of {questions.length}
 					</div>
 				</CardContent>
